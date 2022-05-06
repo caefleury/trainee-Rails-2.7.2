@@ -1,4 +1,13 @@
 class Api::V1::ProductsController < ApplicationController
+
+    acts_as_token_authentication_handler_for User,only: [:index,:show]
+
+    
+
+    def products_params
+        params.require(:product).permit(:name,:description,:price,:tag_id, articles: [],nutrients: [])
+    end
+
     def index
         products = Product.all
         render json: products, status: :ok
@@ -17,10 +26,6 @@ class Api::V1::ProductsController < ApplicationController
         render json: product, status: :created
     rescue StandardError => e
         render json: e, status: :bad_request
-    end
-
-    def products_params
-        params.require(:product).permit(:name,:description,:price,:tag_id)
     end
 
     def update
