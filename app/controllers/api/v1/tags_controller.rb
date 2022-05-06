@@ -1,4 +1,7 @@
 class Api::V1::TagsController < ApplicationController
+    
+    acts_as_token_authentication_handler_for User,only: [:index,:show]
+
     def index
         tags = Tag.all
         render json: tags, status: :ok

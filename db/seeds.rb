@@ -26,3 +26,18 @@ product_list = [
 product_list.each do |name, description, price, tag|
     Product.create!(name:name,description:description, price: price, tag_id:tag)
 end
+
+User.create!(name:"batata",email:"batata@batata.com",password:"batata",is_admin:false)
+User.create!(name:"cenoura",email:"cenoura@cenoura.com",password:"cenoura",is_admin:false)
+
+UserProduct.create!(user_id:1, product_id:1)
+UserProduct.create!(user_id:1, product_id:2)
+UserProduct.create!(user_id:1, product_id:3)
+UserProduct.create!(user_id:1, product_id:4)
+
+UserProduct.create!(user_id:2, product_id:1)
+UserProduct.create!(user_id:2, product_id:2)
+UserProduct.create!(user_id:2, product_id:3)
+UserProduct.create!(user_id:2, product_id:4)
+
+User.find_by(id:1).photo.attach(io: File.open('./public/batata.png'), filename: 'batata.png')
